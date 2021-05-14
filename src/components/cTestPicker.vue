@@ -65,6 +65,7 @@ export default {
   align-items: center;
 
   .head-modal {
+    padding-top: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;

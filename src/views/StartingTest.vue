@@ -40,7 +40,7 @@
         type="radio"
         id="slovly"
         name="time-choose"
-        value="15"
+        value="1"
         v-model="test_settings.timer"
       />
       <label for="slovly"
@@ -79,7 +79,7 @@ export default {
       test_settings: {
         user: "",
         test: { id: "", name: "..." },
-        timer: "15",
+        timer: "0",
         test_pack: {},
       },
       test_pick: false,

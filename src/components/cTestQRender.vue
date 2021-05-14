@@ -1,12 +1,12 @@
 <template>
   <div v-if="type === 'text'" class="q-text">
-    <ul
-      v-for="(variant, i) in variants"
-      :key="i"
-      @click="selected = i"
-      :class="{ selected: selected === i }"
-    >
-      <li>
+    <ul>
+      <li
+        v-for="(variant, i) in variants"
+        :key="i"
+        @click="(selected = i), $emit('selected', i + 1)"
+        :class="{ selected: selected === i }"
+      >
         <span>{{ i + 1 }}</span>
         <p>{{ variant }}</p>
       </li>
@@ -22,6 +22,7 @@
 <script>
 export default {
   props: ["type", "img", "variants", "counter_q"],
+  emits: ["selected"],
   data() {
     return {
       selected: "",
@@ -45,15 +46,6 @@ export default {
   color: #4f4f4f;
   ul {
     list-style: none;
-    background-color: white;
-    border-radius: 5px;
-    border: 3px solid #797cc2;
-    cursor: pointer;
-    &:hover {
-      border-radius: 5px;
-      border: 3px solid #797cc2;
-      background-color: rgb(175, 230, 255);
-    }
     li {
       min-height: 50px;
       display: flex;
@@ -61,6 +53,15 @@ export default {
       justify-content: space-between;
       align-items: center;
       font-weight: 400;
+      background-color: white;
+      border-radius: 5px;
+      border: 3px solid #797cc2;
+      cursor: pointer;
+      &:hover {
+        border-radius: 5px;
+        border: 3px solid #797cc2;
+        background-color: rgb(175, 230, 255);
+      }
       span {
         margin: -5px 40px 0px 8px;
         display: inline-block;
@@ -93,22 +94,26 @@ export default {
   textarea {
     border-radius: 5px;
     outline: none;
-    width: calc(100% - 40px);
-    max-width: calc(100% - 40px);
+    width: calc(100% - 50px);
+    max-width: calc(100% - 50px);
+    min-width: calc(100% - 50px);
     padding: 20px;
     color: #4f4f4f;
     font-size: 20px;
+    max-height: 600px;
   }
 }
 .q-open {
   textarea {
     border-radius: 5px;
     outline: none;
-    width: calc(100% - 40px);
-    max-width: calc(100% - 40px);
+    width: calc(100% - 50px);
+    max-width: calc(100% - 50px);
+    min-width: calc(100% - 50px);
     padding: 20px;
     color: #4f4f4f;
     font-size: 20px;
+    max-height: 600px;
   }
 }
 .selected {

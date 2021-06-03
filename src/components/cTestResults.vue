@@ -59,7 +59,9 @@
     <div class="modal-footer">
       <div class="link-to-social"></div>
       <div class="back-to-main-page">
-        <button class="go_to_main">на главную</button>
+        <button class="go_to_main" onclick="window.location.href='/'">
+          на главную
+        </button>
       </div>
     </div>
   </div>

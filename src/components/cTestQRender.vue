@@ -1,5 +1,6 @@
 <template>
-  <div v-if="type === 'text'" class="q-text">
+  <div class="q-text">
+    <img v-if="img" :src="img" alt="foto-q" />
     <ul>
       <li
         v-for="(variant, i) in variants"
@@ -12,16 +13,11 @@
       </li>
     </ul>
   </div>
-  <div v-if="type === 'img'" class="q-img">
-    <img :src="img" alt="foto-q" />
-    <textarea></textarea>
-  </div>
-  <div v-if="type === 'open'" class="q-open"><textarea></textarea></div>
 </template>
 
 <script>
 export default {
-  props: ["type", "img", "variants", "counter_q"],
+  props: ["img", "variants", "counter_q"],
   emits: ["selected"],
   data() {
     return {
@@ -39,9 +35,14 @@ export default {
 
 <style lang="scss" scoped>
 .q-text {
-  .selected {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  img {
+    width: 50%;
     border-radius: 5px;
-    border: 3px solid rgb(175, 230, 255);
+    border: 3px solid white;
+    margin: 20px 0 20px 0;
   }
   color: #4f4f4f;
   ul {
@@ -62,6 +63,9 @@ export default {
         border: 3px solid #797cc2;
         background-color: rgb(175, 230, 255);
       }
+      &.selected {
+        box-shadow: inset 0px 0px 0px 5px rgb(175, 230, 255);
+      }
       span {
         margin: -5px 40px 0px 8px;
         display: inline-block;
@@ -79,45 +83,5 @@ export default {
       }
     }
   }
-}
-.q-img {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  img {
-    width: 100%;
-    border-radius: 5px;
-    border: 3px solid white;
-    margin-bottom: 5px;
-  }
-  textarea {
-    border-radius: 5px;
-    outline: none;
-    width: calc(100% - 50px);
-    max-width: calc(100% - 50px);
-    min-width: calc(100% - 50px);
-    padding: 20px;
-    color: #4f4f4f;
-    font-size: 20px;
-    max-height: 600px;
-  }
-}
-.q-open {
-  textarea {
-    border-radius: 5px;
-    outline: none;
-    width: calc(100% - 50px);
-    max-width: calc(100% - 50px);
-    min-width: calc(100% - 50px);
-    padding: 20px;
-    color: #4f4f4f;
-    font-size: 20px;
-    max-height: 600px;
-  }
-}
-.selected {
-  border-radius: 5px;
-  border: 3px solid rgb(175, 230, 255);
 }
 </style>

@@ -40,7 +40,7 @@
         type="radio"
         id="slovly"
         name="time-choose"
-        value="1"
+        value="15"
         v-model="test_settings.timer"
       />
       <label for="slovly"
@@ -60,9 +60,7 @@
         минут</label
       >
     </div>
-    <button class="btn btn-start" @click="StartTest()">
-      начать тестирование
-    </button>
+    <button class="btn btn-start" @click="StartTest()">начать тест</button>
   </div>
   <cTestRoom :test_settings="test_settings" v-if="starting_test"></cTestRoom>
 </template>
@@ -162,6 +160,10 @@ export default {
   }
 }
 .starting-test {
+  background-color: #797cc3;
+  color: #e1e1e1;
+  width: 100%;
+  overflow: auto;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -213,7 +215,7 @@ export default {
     color: white;
   }
   .btn-start {
-    width: 220px;
+    width: 120px;
     height: 30px;
     border-radius: 5px;
     color: #797cc2;

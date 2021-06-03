@@ -14,7 +14,6 @@
       <p>{{ current_test[counter_q].title }}</p>
     </section>
     <cTestQRender
-      :type="current_test[counter_q].type"
       :variants="current_test[counter_q].variants"
       :img="current_test[counter_q].img"
       :counter_q="counter_q"
@@ -24,21 +23,39 @@
       v-show="counter_q !== last_q"
       @click="counter_q++"
       class="btn btn-next"
+      :disabled="!answers[counter_q]"
     >
       &#10140;
     </button>
-    <button class="btn btn-exit-test" v-if="counter_q == last_q">
+    <button
+      @click="test_end = true"
+      class="btn btn-exit-test"
+      :disabled="!answers[counter_q]"
+      v-if="counter_q == last_q"
+    >
       закончить тест
     </button>
-    <button @click="Log()">answers_true</button>
-    <button @click="Timer(timer)">1</button>
   </div>
   <cTestResults
     :user="user"
     :test="test_settings.test_pack.discription"
     :answers="answers"
-    v-if="test_end"
+    :answers_true="answers_true"
+    :end="test_end"
+    :current_test="current_test"
   ></cTestResults>
+  <div class="modal_start" v-if="show_modal_start">
+    <div>
+      <button class="back" @click="$router.go(-1)">x</button>
+      <p>Тема : {{ test_settings.test_pack.discription }}</p>
+      <p>Тестируемый : {{ user }}</p>
+      <p>
+        Таймер : <span v-if="timer === 0">нету</span>
+        <span v-else>{{ timer }} минут</span>
+      </p>
+      <button @click="Start()" class="start">Начать</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -57,7 +74,8 @@ export default {
       selected: "",
       test_end: false,
       answers: {},
-      answers_true: this.test_settings.test_pack["right"],
+      answers_true: this.test_settings.test_pack["answers_true"],
+      show_modal_start: true,
     };
   },
   methods: {
@@ -83,12 +101,14 @@ export default {
           --timeMinut;
         }, 1000);
     },
-    Log: function () {
-      console.log(this.answers_true[6]);
-    },
     AddAnswer: function (i) {
       this.answers[this.counter_q] = i;
-      console.log(this.answers);
+    },
+    Start: function () {
+      this.show_modal_start = false;
+      if (this.timer > 0) {
+        this.Timer(this.timer);
+      }
     },
   },
 };
@@ -101,6 +121,7 @@ export default {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  background-color: #797cc3;
 
   section {
     width: 600px;
@@ -179,11 +200,17 @@ export default {
     &:hover {
       color: rgb(103, 216, 129);
     }
+    &:disabled,
+    &[disabled] {
+      background-color: gray;
+      color: white;
+      cursor: not-allowed;
+    }
   }
   .btn-exit-test {
     margin-top: 20px;
     margin-bottom: 20px;
-    background: none;
+    background: rgb(103, 216, 129);
     color: white;
     font-size: 20px;
     border: 2px solid white;
@@ -193,6 +220,53 @@ export default {
       color: rgb(103, 216, 129);
       background-color: white;
     }
+    &:disabled,
+    &[disabled] {
+      background-color: gray;
+      color: white;
+      cursor: not-allowed;
+    }
+  }
+}
+.modal_start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #797cc3;
+  color: #e1e1e1;
+  z-index: 1;
+  p {
+    align-self: flex-start;
+    font: 1.5em sans-serif;
+  }
+  button {
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    color: #797cc2;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 30px 0;
+    &:hover {
+      color: rgb(103, 216, 129);
+      background-color: white;
+    }
+  }
+  button.back {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    background: none;
+    color: white;
+    border: 2px solid #e1e1e1;
+    border-radius: 50%;
   }
 }
 </style>

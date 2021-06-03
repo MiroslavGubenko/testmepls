@@ -11,15 +11,16 @@
   font-family: "Source Sans Pro", sans-serif;
   padding: 0;
   margin: 0;
+  scrollbar-width: thin;
+  scrollbar-color: #e1e1e1 #797cc3;
+  scroll-margin-block: 20px;
+  scroll-behavior: smooth;
 }
 .content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-
   background-color: #797cc3;
   color: #e1e1e1;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
 }
 </style>

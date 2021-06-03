@@ -10,10 +10,12 @@
 <style lang="scss" scoped>
 .main-container {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
   top: 0;
   left: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: #797cc3;
+  color: #e1e1e1;
 
   display: flex;
   align-items: center;

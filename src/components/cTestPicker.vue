@@ -76,6 +76,7 @@ export default {
     }
     .btn-close {
       height: 30px;
+      padding: 5px;
       font-weight: 600;
       background: none;
       color: white;

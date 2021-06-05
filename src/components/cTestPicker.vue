@@ -11,7 +11,7 @@
         :key="i"
         @click="TestPick(i, test)"
       >
-        <p>{{ test }}</p>
+        <p>{{ test["name"] }}</p>
       </div>
     </div>
   </div>
@@ -22,7 +22,7 @@ export default {
   emits: ["close", "test"],
   data() {
     return {
-      tests_list: undefined,
+      tests_list: [],
     };
   },
   created() {
@@ -30,13 +30,15 @@ export default {
   },
   methods: {
     GetTestsList: async function () {
-      let url = "http://192.168.0.126:8000/ListTests";
+      let url = "http://192.168.0.126:8000/list";
       await fetch(url)
         .then((res) => res.json())
         .then((ListTests) => (this.tests_list = ListTests))
+        .then(console.log(this.tests_list))
         .catch((e) => console.log(e));
     },
     TestPick: function (i, t) {
+      console.log(i);
       this.$emit("test", i, t);
       this.$emit("close");
     },

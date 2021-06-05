@@ -34,11 +34,11 @@
           class="answers"
           v-for="(question, i) in current_test"
           :key="i"
-          :class="[answers_chek[i + 1] ? 'true' : 'false']"
+          :class="[answers_chek[i] ? 'true' : 'false']"
         >
           <div class="q">
             <h4>
-              <i>{{ i }}</i
+              <i>{{ i + 1 }}</i
               >. {{ question.title }}
             </h4>
           </div>
@@ -46,7 +46,7 @@
           <ul v-for="(v, k) in question.variants" :key="k">
             <li
               :class="{
-                true_variant: k + 1 === answers_true[i - 1],
+                true_variant: k + 1 === Number(answers_true[i]),
                 pick: k + 1 === answers[i],
               }"
             >
@@ -86,8 +86,8 @@ export default {
   methods: {
     ChekAnswers: function () {
       for (var key in this.answers) {
-        if (this.answers_true[key - 1] == this.answers[key]) {
-          this.answers_chek[key + 1] = true;
+        if (this.answers_true[key] == this.answers[key]) {
+          this.answers_chek[key] = true;
           this.success++;
         } else this.answers_chek[key] = false;
       }

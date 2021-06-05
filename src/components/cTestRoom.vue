@@ -8,8 +8,8 @@
       <div class="timer" v-if="timer !== 0">{{ timer }}</div>
     </section>
     <p class="q-couner">Вопрос № {{ counter_q }}</p>
-    <progress :value="counter_q" :max="last_q"></progress>
-    <p class="progress-counter">{{ counter_q }} / {{ last_q }}</p>
+    <progress :value="counter_q + 1" :max="last_q"></progress>
+    <p class="progress-counter">{{ counter_q + 1 }} / {{ last_q }}</p>
     <section class="q-body">
       <p>{{ current_test[counter_q].title }}</p>
     </section>
@@ -20,8 +20,8 @@
       @selected="AddAnswer"
     ></cTestQRender>
     <button
-      v-show="counter_q !== last_q"
-      @click="counter_q++"
+      v-show="counter_q !== last_q - 1"
+      @click="Counter"
       class="btn btn-next"
       :disabled="!answers[counter_q]"
     >
@@ -31,7 +31,7 @@
       @click="test_end = true"
       class="btn btn-exit-test"
       :disabled="!answers[counter_q]"
-      v-if="counter_q == last_q"
+      v-if="counter_q == last_q - 1"
     >
       закончить тест
     </button>
@@ -68,7 +68,7 @@ export default {
     return {
       user: this.test_settings.user || "NoName",
       timer: Number(this.test_settings.timer) || 0,
-      counter_q: 1,
+      counter_q: 0,
       last_q: Object.keys(this.test_settings.test_pack["questions"]).length,
       current_test: this.test_settings.test_pack["questions"],
       selected: "",
@@ -109,6 +109,10 @@ export default {
       if (this.timer > 0) {
         this.Timer(this.timer);
       }
+    },
+    Counter: function () {
+      this.counter_q++;
+      console.log(this.counter_q);
     },
   },
 };

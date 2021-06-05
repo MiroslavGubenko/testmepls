@@ -16,7 +16,7 @@
     <div class="input-box">
       <label for="test-select">Выберете тест</label>
       <button @click="test_pick = true" class="btn btn-select-test">
-        {{ test_settings.test.name }}
+        {{ test_settings.test_pack.discription }}
       </button>
       <cTestPickerVue
         @test="SetTest"
@@ -76,7 +76,7 @@ export default {
       bar: 0,
       test_settings: {
         user: "",
-        test: { id: "", name: "..." },
+        test: {},
         timer: "0",
         test_pack: {},
       },
@@ -110,7 +110,7 @@ export default {
       }
     },
     GetTestPack: async function (id) {
-      let url = `http://192.168.0.126:8000/${id}`;
+      let url = `http://192.168.0.126:8000/tests/${id}`;
       await fetch(url)
         .then((res) => res.json())
         .then((test) => (this.test_settings.test_pack = test))

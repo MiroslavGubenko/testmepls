@@ -40,10 +40,13 @@
       на главную
     </button>
   </div>
+  <cTestsList @test_open="SetQ" :update="update" @update="update = false" />
 </template>
 
 <script>
+import cTestsList from "../components/cTestsList.vue";
 export default {
+  components: { cTestsList },
   data() {
     return {
       qs: [],
@@ -52,6 +55,7 @@ export default {
         questions: {},
         answers_true: [],
       },
+      update: false,
     };
   },
   methods: {
@@ -64,6 +68,10 @@ export default {
     DeleteQ: function (i) {
       this.qs.splice(i, 1);
     },
+    SetQ: function (test) {
+      this.qs = test.questions;
+      this.test.discription = test.discription;
+    },
     SaveQPack: async function () {
       this.test.questions = this.qs;
       let url = "http://192.168.0.126:8000/tests";
@@ -75,11 +83,11 @@ export default {
         body: JSON.stringify(this.test),
       })
         .then((res) => res.json())
-        .then(console.log(JSON.stringify(this.test)))
         .catch((e) => console.log(e));
 
       this.test.discription = "";
       this.qs = [];
+      this.update = true;
     },
   },
 };
@@ -93,7 +101,7 @@ ul {
 hr {
   margin-top: 20px;
   margin-bottom: 20px;
-  width: 90%;
+  width: 20%;
   color: white;
 }
 textarea {

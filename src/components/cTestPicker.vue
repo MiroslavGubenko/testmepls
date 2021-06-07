@@ -9,9 +9,9 @@
         class="card"
         v-for="(test, i) in tests_list"
         :key="i"
-        @click="TestPick(i, test)"
+        @click="TestPick(test.id, test)"
       >
-        <p>{{ test }}</p>
+        <p>{{ test.discription }}</p>
       </div>
     </div>
   </div>
@@ -33,10 +33,7 @@ export default {
       let url = "http://192.168.0.126:8000/tests";
       await fetch(url)
         .then((res) => res.json())
-        .then((ListTests) =>
-          ListTests.forEach((test) => this.tests_list.push(test["discription"]))
-        )
-        .then(console.log(this.tests_list))
+        .then((list) => (this.tests_list = list))
         .catch((e) => console.log(e));
     },
     TestPick: function (i, t) {

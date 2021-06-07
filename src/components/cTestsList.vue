@@ -62,7 +62,7 @@ export default {
     update: function () {
       if (this.update) {
         this.LoadTests();
-        this.$emit("update", false);
+        this.$emit("update");
       }
     },
   },

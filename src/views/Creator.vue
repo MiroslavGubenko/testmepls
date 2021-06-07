@@ -56,6 +56,7 @@ export default {
         answers_true: [],
       },
       update: false,
+      id: -1,
     };
   },
   methods: {
@@ -71,23 +72,35 @@ export default {
     SetQ: function (test) {
       this.qs = test.questions;
       this.test.discription = test.discription;
+      this.id = test.id;
     },
     SaveQPack: async function () {
       this.test.questions = this.qs;
-      let url = "http://192.168.0.126:8000/tests";
-      await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json;charset=UTF-8",
-        },
-        body: JSON.stringify(this.test),
-      })
-        .then((res) => res.json())
-        .catch((e) => console.log(e));
-
+      if (this.id === -1) {
+        let url = "http://192.168.0.126:8000/tests";
+        await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+          body: JSON.stringify(this.test),
+        }).catch((e) => console.log(e));
+      } else {
+        let url = `http://192.168.0.126:8000/tests/${this.id}`;
+        await fetch(url, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+          body: JSON.stringify(this.test),
+        })
+          .then((res) => res.json())
+          .catch((e) => console.log(e));
+      }
       this.test.discription = "";
       this.qs = [];
       this.update = true;
+      this.id = -1;
     },
   },
 };

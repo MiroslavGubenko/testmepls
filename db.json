@@ -145,32 +145,68 @@
         "2"
       ],
       "id": 5
-    }
-  ],
-  "list": [
-    {
-      "id": 0,
-      "name": "UX/UI. Модуль 1."
     },
     {
-      "name": "Математика",
-      "id": 1
+      "discription": "Математика 2",
+      "questions": [
+        {
+          "title": "4+4",
+          "variants": [
+            "1",
+            "2",
+            "3",
+            "8"
+          ]
+        },
+        {
+          "title": "3+1*2",
+          "variants": [
+            "1",
+            "2",
+            "3",
+            "5"
+          ]
+        }
+      ],
+      "answers_true": [
+        "4",
+        "4"
+      ],
+      "id": 6
     },
     {
-      "name": "Петухи",
-      "id": 2
+      "discription": "Математика 3",
+      "questions": [
+        {
+          "title": "5+5",
+          "variants": [
+            "1",
+            "1",
+            "1",
+            "10"
+          ]
+        },
+        {
+          "title": "+3-3",
+          "variants": [
+            "1",
+            "1",
+            "1",
+            "0"
+          ]
+        }
+      ],
+      "answers_true": [
+        "4",
+        "4"
+      ],
+      "id": 7
     },
     {
-      "name": "Gtnep[b",
-      "id": 3
-    },
-    {
-      "name": "Жопа",
-      "id": 4
-    },
-    {
-      "name": "SSS",
-      "id": 5
+      "discription": "",
+      "questions": [],
+      "answers_true": [],
+      "id": 8
     }
   ]
 }

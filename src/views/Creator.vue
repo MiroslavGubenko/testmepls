@@ -32,7 +32,13 @@
     </ul>
     <button class="add_q" @click="AddNewQ">добавить вопрос</button>
     <hr />
-    <button class="save_q_pack" @click="SaveQPack">сохранить тест</button>
+    <hr />
+    <button class="save_q_pack" v-if="qs.length" @click="SaveQPack">
+      сохранить тест
+    </button>
+    <button class="go_to_main" onclick="window.location.href='/'">
+      на главную
+    </button>
   </div>
 </template>
 
@@ -61,17 +67,6 @@ export default {
     SaveQPack: async function () {
       this.test.questions = this.qs;
       let url = "http://192.168.0.126:8000/tests";
-      let url2 = "http://192.168.0.126:8000/list";
-      await fetch(url2, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json;charset=UTF-8",
-        },
-        body: JSON.stringify({ name: this.test.discription }),
-      })
-        .then((res) => res.json())
-        .then(console.log(JSON.stringify(this.test.discription)))
-        .catch((e) => console.log(e));
       await fetch(url, {
         method: "POST",
         headers: {
@@ -82,6 +77,9 @@ export default {
         .then((res) => res.json())
         .then(console.log(JSON.stringify(this.test)))
         .catch((e) => console.log(e));
+
+      this.test.discription = "";
+      this.qs = [];
     },
   },
 };

@@ -7,7 +7,7 @@
       </div>
       <div class="timer" v-if="timer !== 0">{{ timer }}</div>
     </section>
-    <p class="q-couner">Вопрос № {{ counter_q }}</p>
+    <p class="q-couner">Вопрос № {{ counter_q + 1 }}</p>
     <progress :value="counter_q + 1" :max="last_q"></progress>
     <p class="progress-counter">{{ counter_q + 1 }} / {{ last_q }}</p>
     <section class="q-body">

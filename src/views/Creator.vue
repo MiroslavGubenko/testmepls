@@ -2,7 +2,7 @@
   <div class="creator">
     <div class="input">
       <label for="test_discription">Название теста</label>
-      <input id="test_discription" v-model="test.discription" type="text" />
+      <textarea id="test_discription" v-model="test.discription" type="text" />
     </div>
     <hr />
     <ul v-if="qs">
@@ -71,8 +71,9 @@ export default {
     },
     SetQ: function (test) {
       this.qs = test.questions;
-      this.test.discription = test.discription;
+      this.test = test;
       this.id = test.id;
+      // this.test.answers_true = test.answers_true;
     },
     SaveQPack: async function () {
       this.test.questions = this.qs;
@@ -93,9 +94,7 @@ export default {
             "Content-Type": "application/json;charset=UTF-8",
           },
           body: JSON.stringify(this.test),
-        })
-          .then((res) => res.json())
-          .catch((e) => console.log(e));
+        }).catch((e) => console.log(e));
       }
       this.test.discription = "";
       this.qs = [];
@@ -118,18 +117,21 @@ hr {
   color: white;
 }
 textarea {
-  text-align: center;
   resize: none;
   margin: 2px;
+  padding: 2px;
+  border-radius: 5px;
+  width: 100%;
 }
 .creator {
   padding-top: 50px;
-  font-size: 20px;
+  font-size: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 100%;
+  min-width: 1000px;
 
   .input {
     display: flex;
@@ -140,6 +142,7 @@ textarea {
     margin: 15px;
     padding: 15px;
     border-radius: 5px;
+    width: 100%;
   }
   button {
     color: #797cc3;

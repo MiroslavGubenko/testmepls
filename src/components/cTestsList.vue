@@ -13,11 +13,11 @@
           <ul>
             <li v-for="(q, i) in test.questions" :key="i">
               <p>Вопрос № {{ i + 1 }} : {{ q.title }}</p>
+              <hr />
             </li>
           </ul>
         </details>
         <p v-else>Вопросов нету</p>
-        <hr />
         <div class="card_btn">
           <button @click="OpenTest(test)">
             <strong>редактировать &#9998;</strong>

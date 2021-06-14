@@ -94,7 +94,6 @@ export default {
           if (timeMinut == -1) {
             clearInterval(t);
             self.test_end = true;
-            //alert("Время закончилось");
           } else {
             self.timer = `${minutes}:${seconds}`;
           }
@@ -112,7 +111,6 @@ export default {
     },
     Counter: function () {
       this.counter_q++;
-      console.log(this.counter_q);
     },
   },
 };

@@ -1,24 +1,31 @@
-# testmepls
+# TestMePls
+## Тестовое задание:
+__Реализация программы для тестирования.__
+__Доп. задания__:
+ - создание, редактирование и сохранение тестов на локальном сервере;
+---
+---
+## Фрейморки, библиотеки и плагины
+- VueJs 3 , 
+- Vue CLI ,
+- JSONserver.
 
-## Project setup
+## Установка и Настройка
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+```
+npm install -g json-server
+```
+### Dev-режим
+
+
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
 ```
-npm run build
+json-server --watch db.json
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

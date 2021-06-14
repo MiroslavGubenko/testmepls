@@ -37,7 +37,6 @@ export default {
         .catch((e) => console.log(e));
     },
     TestPick: function (i, t) {
-      console.log(i);
       this.$emit("test", i, t);
       this.$emit("close");
     },

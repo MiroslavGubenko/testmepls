@@ -73,7 +73,6 @@ export default {
       this.qs = test.questions;
       this.test = test;
       this.id = test.id;
-      // this.test.answers_true = test.answers_true;
     },
     SaveQPack: async function () {
       this.test.questions = this.qs;
